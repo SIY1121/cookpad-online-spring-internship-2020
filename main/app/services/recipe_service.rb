@@ -17,6 +17,7 @@ class RecipeService < Main::Services::V1::Recipe::Service
 
     # TODO: Avoid to N+1 query, Use index
     recipes = Recipe.
+      preload(:steps,:ingredients, :user).
       order(created_at: :desc).
       page(page).
       per(per_page)
